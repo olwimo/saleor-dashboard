@@ -1,7 +1,7 @@
 FROM node:18-alpine as builder
 WORKDIR /app
 COPY package*.json ./
-COPY scripts/patchReactVirtualized.js scripts/
+# COPY scripts/patchReactVirtualized.js scripts/
 ENV CI 1
 RUN npm ci --legacy-peer-deps
 
@@ -42,7 +42,7 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./nginx/replace-api-url.sh /docker-entrypoint.d/50-replace-api-url.sh
 COPY --from=builder /app/build/ /app/
 
-LABEL org.opencontainers.image.title="saleor/saleor-dashboard"                                  \
+LABEL org.opencontainers.image.title="olwimo/saleor-dashboard"                                  \
       org.opencontainers.image.description="A GraphQL-powered, single-page dashboard application for Saleor." \
       org.opencontainers.image.url="https://saleor.io/"                                \
       org.opencontainers.image.source="https://github.com/saleor/saleor-dashboard"     \
